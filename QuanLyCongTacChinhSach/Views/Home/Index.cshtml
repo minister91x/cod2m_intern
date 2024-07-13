@@ -1,0 +1,220 @@
+﻿ <!-- SELECT2 EXAMPLE -->
+<link href="~/lib/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<div class="card card-default">
+    <div class="card-header">
+        <h3 class="card-title">Hồ sơ gốc</h3>
+
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <div class="row">
+            <div class="col-7">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Họ và tên</label>
+                            <input type="checkbox" id="ckbHoVaTen" name="HoVaTen" value="HoVaTen">
+                            <input type="text" class="form-control" id="HoVaTen" placeholder="Vd: Nguyễn Trọng Quân">
+                        </div>
+                        <div class="form-group">
+                            <label>Số hiệu QN</label>
+                            <input type="checkbox" id="ckbHoVaTen" name="HoVaTen" value="HoVaTen">
+                            <input type="text" class="form-control" id="SoHieuQN" placeholder="Vd: 1190QN">
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày sinh</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                       data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Loại hồ sơ</label>
+                            <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
+                                <option>Alabama</option>
+                                <option>Alaska</option>
+                                <option>California</option>
+                                <option>Delaware</option>
+                                <option>Tennessee</option>
+                                <option>Texas</option>
+                                <option>Washington</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Quyền số</label>
+                            <input type="number" class="form-control" id="SoHieuQN">
+                        </div>
+                        <div class="form-group">
+                            <label>Trang số</label>
+                            <input type="number" class="form-control" id="SoHieuQN">
+                        </div>
+                        <div class="form-group">
+                            <label>Số thứ tự</label>
+                            <input type="number" class="form-control" id="SoHieuQN">
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Bắt đầu</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                       data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Kết thúc</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                       data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Cơ quan TT bộ</label>
+                            <select class="form-control select2" style="width: 100%;">
+                                <option selected="selected">Alabama</option>
+                                <option>Alaska</option>
+                                <option disabled="disabled">California (disabled)</option>
+                                <option>Delaware</option>
+                                <option>Tennessee</option>
+                                <option>Texas</option>
+                                <option>Washington</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Cơ quan tỉnh</label>
+                            <select class="form-control select2" style="width: 100%;">
+                                <option selected="selected">Alabama</option>
+                                <option>Alaska</option>
+                                <option disabled="disabled">California (disabled)</option>
+                                <option>Delaware</option>
+                                <option>Tennessee</option>
+                                <option>Texas</option>
+                                <option>Washington</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Cơ quan huyện</label>
+                            <select class="form-control select2" style="width: 100%;">
+                                <option selected="selected">Alabama</option>
+                                <option>Alaska</option>
+                                <option disabled="disabled">California (disabled)</option>
+                                <option>Delaware</option>
+                                <option>Tennessee</option>
+                                <option>Texas</option>
+                                <option>Washington</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Cơ quan cụ thể</label>
+                            <select class="form-control select2" style="width: 100%;">
+                                <option selected="selected">Alabama</option>
+                                <option>Alaska</option>
+                                <option disabled="disabled">California (disabled)</option>
+                                <option>Delaware</option>
+                                <option>Tennessee</option>
+                                <option>Texas</option>
+                                <option>Washington</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Mã hồ sơ</label>
+                            <input type="text" class="form-control" id="HoVaTen">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-primary">Tìm kiếm</button>
+                            <button class="btn btn-secondary">Load lại</button>
+                            <button class="btn btn-success">In phiếu</button>
+                            <button class="btn btn-danger">Thêm mới</button>
+                            <button class="btn btn-warning">Cập nhật</button>
+                            <button class="btn btn-info">Xóa bỏ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="form-group">
+                    <label>Thông tin chi tiết</label>
+                    <textarea class="form-control" rows="25"></textarea>
+                </div>
+
+            </div>
+        </div>
+        <table id="customerDatatable" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Họ tên</th>
+                    <th>Mã NV</th>
+                    <th>Mã hồ sơ</th>
+                    <th>Loại hồ sơ</th>
+                    <th>Ngày sinh</th>
+                    <th>Bắt đầu</th>
+                    <th>Kết thúc</th>
+                    <th>CQ TT Bộ</th>
+                    <th>Cơ quan tỉnh</th>
+                    <th>Cơ quan huyện</th>
+                    <th>Cơ quan cụ thể</th>
+                    <th>Chi tiết</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+        Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and information about
+        the plugin.
+    </div>
+</div>
+@section Scripts{
+    <script src="~/lib/datatables/js/dataTables.dataTables.min.js"></script>
+    <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#customerDatatable").DataTable({
+                "processing": true,
+                "serverSide": true,
+                "filter": true,
+                "ajax": {
+                    "url": "/product",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columnDefs": [{
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                }],
+                "columns": [
+                    { "data": "id", "name": "Id", "autoWidth": true },
+                    { "data": "name", "name": "Name", "autoWidth": true },
+                    { "data": "price", "name": "Price", "autoWidth": true },
+                    { "data": "category", "name": "Category", "autoWidth": true },
+                    {
+                        "render": function (data, row) { return "<a href='#' class='btn btn-danger' onclick=DeleteCustomer('" + row.id + "'); >Delete</a>"; }
+                    },
+                ]
+            });
+        });
+    </script>
+}
+<!-- /.card -->
