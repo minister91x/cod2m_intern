@@ -11,23 +11,37 @@ namespace QuanLyCongTacChinhSach.DataAccess.IRepositories
 {
     public class Repository<T> : IRepository<T> where T : class, new()
     {
-        private readonly string _connectionString;
+        private readonly string _connectionString = "Server=125.212.218.93\\MSSQLSERVER2022;Database=ciucynhk_DbDev;User Id=ciucynhk_dev;Password=LebJXti9pGtWcfZodHeuuBem5nX4Dmvh;Trusted_Connection=False;MultipleActiveResultSets=true;TrustServerCertificate=true";
 
-        public Repository(string connectionString)
+        public Repository()
         {
-            _connectionString = connectionString;
         }
+
         public async Task<bool> Add(T entity)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 string spName = $"SP_{typeof(T).Name}_Insert";
-                var parameters = new DynamicParameters(entity);
+                var parameters = GetDynamicParameters(entity);
                 int affectedRows = await connection.ExecuteAsync(spName, parameters, commandType: CommandType.StoredProcedure);
                 return affectedRows > 0;
             }
         }
+        private DynamicParameters GetDynamicParameters(T entity)
+        {
+            var parameters = new DynamicParameters();
 
+            foreach (var property in typeof(T).GetProperties())//dùng Reflection
+            {
+                var value = property.GetValue(entity);
+                if (value != null)
+                {
+                    parameters.Add($"@{property.Name}", value);
+                }
+            }
+
+            return parameters;
+        }
         public async Task<bool> Update(T entity)
         {
             using (var connection = new SqlConnection(_connectionString))

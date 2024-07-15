@@ -10,32 +10,11 @@ namespace QuanLyCongTacChinhSach.DataAccess.Factory
 {
     public class HoSoGocFactory : IHoSoGocFactory
     {
-        private readonly IRepository<HoSoGoc> _repository;
+        public IRepository<HoSoGoc> Repository { get; private set; }
 
-        public HoSoGocFactory(IRepository<HoSoGoc> iRepository)
+        public HoSoGocFactory(IRepository<HoSoGoc> repository)
         {
-            _repository = iRepository;
-        }
-
-        public async Task<bool> AddHoSoGoc(HoSoGoc hoSoGoc)
-        {
-            return await _repository.Add(hoSoGoc);
-        }
-        public async Task<bool> UpdateHoSoGoc(HoSoGoc hoSoGoc)
-        {
-            return await _repository.Update(hoSoGoc);
-        }
-        public async Task<bool> DeleteHoSoGoc(int id)
-        {
-            return await _repository.Delete(id);
-        }
-        public async Task<HoSoGoc> GetById(int id)
-        {
-            return await _repository.GetById(id);
-        }
-        public async Task<IEnumerable<HoSoGoc>> GetAll()
-        {
-            return await _repository.GetAll();
+            Repository = repository;
         }
     }
 }

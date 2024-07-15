@@ -121,6 +121,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HoSoGocController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2109,6 +2110,21 @@
     <Content Include="lib\datatables\js\dataTables.uikit.min.js" />
     <Content Include="lib\datatables\js\jquery.dataTables.js" />
     <Content Include="lib\datatables\js\jquery.dataTables.min.js" />
+    <Content Include="lib\datatable\css\datatable-bootstrap.css" />
+    <Content Include="lib\datatable\css\datatable-bootstrap.min.css" />
+    <Content Include="lib\datatable\css\datatable.css" />
+    <Content Include="lib\datatable\css\datatable.min.css" />
+    <Content Include="lib\datatable\img\sort_asc.png" />
+    <Content Include="lib\datatable\img\sort_both.png" />
+    <Content Include="lib\datatable\img\sort_desc.png" />
+    <Content Include="lib\datatable\js\datatable.jquery.js" />
+    <Content Include="lib\datatable\js\datatable.jquery.min.js" />
+    <Content Include="lib\datatable\js\datatable.js" />
+    <Content Include="lib\datatable\js\datatable.min.js" />
+    <Content Include="lib\jquery-toast-plugin\jquery.toast.css" />
+    <Content Include="lib\jquery-toast-plugin\jquery.toast.js" />
+    <Content Include="lib\jquery-toast-plugin\jquery.toast.min.css" />
+    <Content Include="lib\jquery-toast-plugin\jquery.toast.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -2273,6 +2289,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\HoSoGoc\Insert.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2304,6 +2321,12 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QuanLyCongTacChinhSach.DataAccess\QuanLyCongTacChinhSach.DataAccess.csproj">
+      <Project>{cb491f17-bc6e-4ae2-97bd-0a27d7c48544}</Project>
+      <Name>QuanLyCongTacChinhSach.DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

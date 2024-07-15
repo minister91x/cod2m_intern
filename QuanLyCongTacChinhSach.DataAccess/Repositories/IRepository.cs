@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyCongTacChinhSach.DataAccess.IRepositories
 {
-    public interface IRepository<T>
+    public interface IRepository<T> where T : class, new()
     {
         Task<bool> Add(T entity);
         Task<bool> Update(T entity);

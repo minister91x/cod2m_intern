@@ -1,0 +1,193 @@
+﻿ <!-- SELECT2 EXAMPLE -->
+@using QuanLyCongTacChinhSach.DataAccess.DTOs
+@using System.Web.Mvc
+
+@model HoSoGoc
+<div class="card card-default">
+    <div class="card-header">
+        <h3 class="card-title">Hồ sơ gốc</h3>
+
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        @using (Html.BeginForm("Insert", "HoSoGoc", FormMethod.Post, new { @id = "Form_HoSoGoc" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+
+                <div class="col-7">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Họ và tên</label>
+                                <input type="checkbox" id="ckbHoVaTen" name="HoVaTen" value="HoVaTen">
+                                @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "form-control", @placeholder = "Vd: Nguyễn Trọng Quân" } })
+                                @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label>Số hiệu QN</label>
+                                @Html.EditorFor(model => model.SoHieuQN, new { htmlAttributes = new { @class = "form-control", @placeholder = "Vd: QN123" } })
+                                @Html.ValidationMessageFor(model => model.SoHieuQN, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label>Ngày sinh</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                    </div>
+                                    @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control", @data_inputmask_alias = "datetime", @data_inputmask_inputformat = "dd/mm/yyyy", @data_mask = "" } })
+                                    @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Loại hồ sơ</label>
+                                @Html.DropDownListFor(model => model.LoaiHoSo, (SelectList)ViewBag.StateList, new { @class = "form-control select2", @style = "width: 100%;" })
+                                @Html.ValidationMessageFor(model => model.LoaiHoSo, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label>Quyền số</label>
+                                @Html.EditorFor(model => model.QuyenSo, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                                @Html.ValidationMessageFor(model => model.QuyenSo, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label>Trang số</label>
+                                @Html.EditorFor(model => model.TrangSo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TrangSo, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label>Số thứ tự</label>
+                                @Html.EditorFor(model => model.SoThuTu, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SoThuTu, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Bắt đầu</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                    </div>
+                                    @Html.EditorFor(model => model.BatDau, new { htmlAttributes = new { @class = "form-control", @data_inputmask_alias = "datetime", @data_inputmask_inputformat = "dd/mm/yyyy", @data_mask = "" } })
+                                    @Html.ValidationMessageFor(model => model.BatDau, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Kết thúc</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                    </div>
+                                    @Html.EditorFor(model => model.KetThuc, new { htmlAttributes = new { @class = "form-control", @data_inputmask_alias = "datetime", @data_inputmask_inputformat = "dd/mm/yyyy", @data_mask = "" } })
+                                    @Html.ValidationMessageFor(model => model.KetThuc, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Cơ quan TT bộ</label>
+                                @Html.DropDownListFor(model => model.Id_CoQuanTTBo, (SelectList)ViewBag.StateList, new { @class = "form-control select2", @style = "width: 100%;" })
+                                @Html.ValidationMessageFor(model => model.Id_CoQuanTTBo, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label>Cơ quan tỉnh</label>
+                                @Html.DropDownListFor(model => model.Id_CoQuanTinh, (SelectList)ViewBag.StateList, new { @class = "form-control select2", @style = "width: 100%;" })
+                                @Html.ValidationMessageFor(model => model.Id_CoQuanTinh, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label>Cơ quan huyện</label>
+                                @Html.DropDownListFor(model => model.Id_CoQuanHuyen, (SelectList)ViewBag.StateList, new { @class = "form-control select2", @style = "width: 100%;" })
+                                @Html.ValidationMessageFor(model => model.Id_CoQuanHuyen, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label>Cơ quan cụ thể</label>
+                                @Html.DropDownListFor(model => model.Id_CoQuanCuThe, (SelectList)ViewBag.StateList, new { @class = "form-control select2", @style = "width: 100%;" })
+                                @Html.ValidationMessageFor(model => model.Id_CoQuanHuyen, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label>Cơ quan TT bộ</label>
+                                @Html.DropDownListFor(model => model.Id_CoQuanXa, (SelectList)ViewBag.StateList, new { @class = "form-control select2", @style = "width: 100%;" })
+                                @Html.ValidationMessageFor(model => model.Id_CoQuanTTBo, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label>Mã hồ sơ</label>
+                                @Html.EditorFor(model => model.MaHoSo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MaHoSo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-primary">Tìm kiếm</button>
+                                <button class="btn btn-secondary">Load lại</button>
+                                <button class="btn btn-success">In phiếu</button>
+                                <button class="btn btn-danger" type="submit">Thêm mới</button>
+                                <button class="btn btn-warning">Cập nhật</button>
+                                <button class="btn btn-info">Xóa bỏ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="form-group">
+                        <label>Thông tin chi tiết</label>
+                        @Html.TextAreaFor(model => model.TTChiTiet, new { @class = "form-control", rows = "25" })
+                        @Html.ValidationMessageFor(model => model.TTChiTiet, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+        }
+        <table id="customerDatatable" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Họ tên</th>
+                    <th>Mã NV</th>
+                    <th>Mã hồ sơ</th>
+                    <th>Loại hồ sơ</th>
+                    <th>Ngày sinh</th>
+                    <th>Bắt đầu</th>
+                    <th>Kết thúc</th>
+                    <th>CQ TT Bộ</th>
+                    <th>Cơ quan tỉnh</th>
+                    <th>Cơ quan huyện</th>
+                    <th>Cơ quan cụ thể</th>
+                    <th>Chi tiết</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+        Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and information about
+        the plugin.
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $("#Form_HoSoGoc").on("submit", function (e) {
+            e.preventDefault();
+            let formData = $('#Form_HoSoGoc').serialize();
+            $.ajax({
+                type: $('#Form_HoSoGoc').attr('method'),
+                url: $('#Form_HoSoGoc').attr('action'),
+                data: formData,
+                success: function (response) {
+                    if (response.isSuccess) {
+                        ShowToater('success', response.message);
+                    } else {
+                        ShowToater('error', response.message);
+                    }
+                }
+            });
+        })
+    </script>
+
+}
+<!-- /.card -->

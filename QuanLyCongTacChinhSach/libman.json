@@ -9,6 +9,10 @@
     {
       "library": "datatable@2.0.2",
       "destination": "lib/datatable/"
+    },
+    {
+      "library": "jquery-toast-plugin@1.3.2",
+      "destination": "lib/jquery-toast-plugin/"
     }
   ]
 }
