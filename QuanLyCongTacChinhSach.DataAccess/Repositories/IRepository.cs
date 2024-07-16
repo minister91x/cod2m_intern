@@ -13,6 +13,6 @@ namespace QuanLyCongTacChinhSach.DataAccess.IRepositories
         Task<bool> Delete(object id);
         Task<T> GetById(object id);
         Task<IEnumerable<T>> GetAll();
-        Task<(IEnumerable<dynamic> Items, int TotalRecords)> Search(string searchTerm, int pageIndex, int pageSize);
+        Task<(IEnumerable<dynamic> Items, int TotalRecords)> Search(object MODEL);
     }
 }

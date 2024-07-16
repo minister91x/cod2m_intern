@@ -1,12 +1,14 @@
 ﻿using QuanLyCongTacChinhSach.DataAccess.DTOs;
 using QuanLyCongTacChinhSach.DataAccess.Factory;
 using QuanLyCongTacChinhSach.DataAccess.IRepositories;
+using QuanLyCongTacChinhSach.DataAccess.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using System.Web.Services.Description;
 
 namespace QuanLyCongTacChinhSach.Controllers
@@ -30,16 +32,15 @@ namespace QuanLyCongTacChinhSach.Controllers
         {
             HoSoGoc hoSoGoc = new HoSoGoc();
             var states = new List<SelectListItem>
-    {
-        new SelectListItem { Text = "Alabama", Value = "1" },
-        new SelectListItem { Text = "Alaska", Value = "2" },
-        new SelectListItem { Text = "California", Value = "3" },
-        new SelectListItem { Text = "Delaware", Value = "4" },
-        new SelectListItem { Text = "Tennessee", Value = "5" },
-        new SelectListItem { Text = "Texas", Value = "6" },
-        new SelectListItem { Text = "Washington", Value = "7" }
-    };
-
+            {
+                new SelectListItem { Text = "Alabama", Value = "1" },
+                new SelectListItem { Text = "Alaska", Value = "2" },
+                new SelectListItem { Text = "California", Value = "3" },
+                new SelectListItem { Text = "Delaware", Value = "4" },
+                new SelectListItem { Text = "Tennessee", Value = "5" },
+                new SelectListItem { Text = "Texas", Value = "6" },
+                new SelectListItem { Text = "Washington", Value = "7" }
+            };
             ViewBag.StateList = new SelectList(states, "Value", "Text");
 
             return View(hoSoGoc);
@@ -48,7 +49,26 @@ namespace QuanLyCongTacChinhSach.Controllers
         public async Task<ActionResult> Insert(HoSoGoc hoSoGoc)
         {
             bool isSuccess = await _hoSoGocFactory.Repository.Add(hoSoGoc);
-            return Json(new { IsSuccess=isSuccess,Message= isSuccess?"Thêm hồ sơ gốc thành":"Thêm hồ sơ không thành công"});
+            return Json(new { IsSuccess = isSuccess, Message = isSuccess ? "Thêm hồ sơ gốc thành" : "Thêm hồ sơ không thành công" });
+        }
+        [HttpGet]
+        public async Task<ActionResult> Search(SearchHoSoGocVM model)
+        {
+            var result =await _hoSoGocFactory.Repository.Search(model);
+            var json = new JavaScriptSerializer().Serialize(result.Items);
+            return Json(new { result }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var result = await _hoSoGocFactory.Repository.Delete(id);
+            return Json(new { IsSuccess = result, Message = result ? "Xóa hồ sơ gốc thành công.!" : "Xóa hồ sơ không thành công.!" });
+        }
+        [HttpPost]
+        public async Task<ActionResult> Update(HoSoGoc hoSoGoc)
+        {
+            var result = await _hoSoGocFactory.Repository.Update(hoSoGoc);
+            return Json(new { IsSuccess = result, Message = result ? "Cập nhật hồ sơ gốc thành công.!" : "Cập nhật hồ sơ không thành công.!" });
         }
     }
 }

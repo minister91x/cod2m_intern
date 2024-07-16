@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using static Dapper.SqlMapper;
 
 namespace QuanLyCongTacChinhSach.DataAccess.IRepositories
 {
@@ -19,15 +20,23 @@ namespace QuanLyCongTacChinhSach.DataAccess.IRepositories
 
         public async Task<bool> Add(T entity)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            try
             {
-                string spName = $"SP_{typeof(T).Name}_Insert";
-                var parameters = GetDynamicParameters(entity);
-                int affectedRows = await connection.ExecuteAsync(spName, parameters, commandType: CommandType.StoredProcedure);
-                return affectedRows > 0;
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    string spName = $"SP_{typeof(T).Name}_Insert";
+                    var parameters = GetDynamicParameters(entity);
+                    var result = await connection.QueryFirstOrDefaultAsync<int>(spName, parameters, commandType: CommandType.StoredProcedure);
+                    return result == 1; 
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                throw;
             }
         }
-        private DynamicParameters GetDynamicParameters(T entity)
+        private DynamicParameters GetDynamicParameters(object entity)
         {
             var parameters = new DynamicParameters();
 
@@ -39,9 +48,9 @@ namespace QuanLyCongTacChinhSach.DataAccess.IRepositories
                     parameters.Add($"@{property.Name}", value);
                 }
             }
-
             return parameters;
         }
+        
         public async Task<bool> Update(T entity)
         {
             using (var connection = new SqlConnection(_connectionString))
@@ -85,21 +94,26 @@ namespace QuanLyCongTacChinhSach.DataAccess.IRepositories
             }
         }
 
-        public async Task<(IEnumerable<dynamic> Items, int TotalRecords)> Search(string searchTerm, int pageIndex, int pageSize)
+        public async Task<(IEnumerable<dynamic> Items, int TotalRecords)> Search(object entity)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            try
             {
-                string spName = $"SP_{typeof(T).Name}_Search";
-                var parameters = new DynamicParameters();
-                parameters.Add("@SearchTerm", searchTerm);
-                parameters.Add("@PageIndex", pageIndex);
-                parameters.Add("@PageSize", pageSize);
-                parameters.Add("@TotalRecords", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    string spName = $"SP_{typeof(T).Name}_Search";
+                    var parameters = GetDynamicParameters(entity);
+                    parameters.Add("@TotalRecords", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                var items =await connection.QueryAsync<dynamic>(spName, parameters, commandType: CommandType.StoredProcedure);
-                int totalRecords = parameters.Get<int>("@TotalRecords");
+                    var items = await connection.QueryAsync<dynamic>(spName, parameters, commandType: CommandType.StoredProcedure);
+                    int totalRecords = parameters.Get<int>("@TotalRecords");
 
-                return (items, totalRecords);
+                    return (items, totalRecords);
+                }
+            }
+            catch (Exception exx)
+            {
+                return (null,0);
+                throw exx;
             }
         }
     }

@@ -45,15 +45,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTOs\HoSoGoc.cs" />
+    <Compile Include="DTOs\ViewModels\SearchHoSoGocVM.cs" />
     <Compile Include="Factory\HoSoGocFactory.cs" />
     <Compile Include="Factory\IHoSoGocFactory.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DTOs\ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
