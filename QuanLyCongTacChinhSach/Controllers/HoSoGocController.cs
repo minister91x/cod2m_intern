@@ -1,4 +1,5 @@
-﻿using QuanLyCongTacChinhSach.DataAccess.DTOs;
+﻿using Newtonsoft.Json;
+using QuanLyCongTacChinhSach.DataAccess.DTOs;
 using QuanLyCongTacChinhSach.DataAccess.Factory;
 using QuanLyCongTacChinhSach.DataAccess.IRepositories;
 using QuanLyCongTacChinhSach.DataAccess.ViewModel;
@@ -49,14 +50,30 @@ namespace QuanLyCongTacChinhSach.Controllers
         public async Task<ActionResult> Insert(HoSoGoc hoSoGoc)
         {
             bool isSuccess = await _hoSoGocFactory.Repository.Add(hoSoGoc);
-            return Json(new { IsSuccess = isSuccess, Message = isSuccess ? "Thêm hồ sơ gốc thành" : "Thêm hồ sơ không thành công" });
+            return Json(new { IsSuccess = isSuccess, Message = isSuccess ? "Thêm or update hồ sơ gốc thành công" : "Thêm or update hồ sơ không thành công" });
+        }
+        [HttpGet]
+        public async Task<ActionResult> GetById(int id)
+        {
+            var result=await _hoSoGocFactory.Repository.GetById(id);
+            return Json(data: result, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public async Task<ActionResult> Search(SearchHoSoGocVM model)
         {
             var result =await _hoSoGocFactory.Repository.Search(model);
-            var json = new JavaScriptSerializer().Serialize(result.Items);
-            return Json(new { result }, JsonRequestBehavior.AllowGet);
+            string itemsJson = JsonConvert.SerializeObject(result.Items);
+
+            // Deserialize back to a proper list of objects
+            var items = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(itemsJson);
+
+            var jsonData = new
+            {
+                data = items,
+                TotalRecords = result.TotalRecords
+            };
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public async Task<ActionResult> Delete(int id)

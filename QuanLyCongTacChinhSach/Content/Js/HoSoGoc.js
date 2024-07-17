@@ -16,7 +16,7 @@
                     pageSize = result.pageSize;
                 }
                 else {
-                    appendDataStandardTerm(null);
+                    appendSearchHoSoGoc(null);
                 }
             }
         });
@@ -27,22 +27,32 @@ function appendSearchHoSoGoc(items) {
     if (items != null) {
         $.each(items, (index, value) => {
             let htmlMore = $('#templateHtmlShowHoSoGoc').html();
-            htmlMore = htmlMore.replace(/{id}/g, value.id);
-            htmlMore = htmlMore.replace(/{hoTen}/g, value.hoTen);
-            htmlMore = htmlMore.replace(/{soHieuQN}/g, value.soHieuQN);
-            htmlMore = htmlMore.replace(/{ngaySinh}/g, value.ngaySinh);
-            htmlMore = htmlMore.replace(/{loaiHoSo}/g, value.loaiHoSo);
-            htmlMore = htmlMore.replace(/{quyenSo}/g, value.quyenSo);
-            htmlMore = htmlMore.replace(/{soThuTu}/g, value.soThuTu);
-            htmlMore = htmlMore.replace(/{batDau}/g, value.batDau);
-            htmlMore = htmlMore.replace(/{ketThuc}/g, value.ketThuc);
-            htmlMore = htmlMore.replace(/{id_CoQuanTTBo}/g, value.id_CoQuanTTBo);
-            htmlMore = htmlMore.replace(/{id_CoQuanTinh}/g, value.id_CoQuanTinh);
-            htmlMore = htmlMore.replace(/{id_CoQuanHuyen}/g, value.id_CoQuanHuyen);
-            htmlMore = htmlMore.replace(/{id_CoQuanXa}/g, value.id_CoQuanXa);
-            htmlMore = htmlMore.replace(/{id_CoQuanCuThe}/g, value.id_CoQuanCuThe);
-            htmlMore = htmlMore.replace(/{maHoSo}/g, value.maHoSo);
+            htmlMore = htmlMore.replace(/{Id_ThongTin}/g, value.Id_ThongTin);
+            htmlMore = htmlMore.replace(/{HoTen}/g, value.HoTen);
+            htmlMore = htmlMore.replace(/{MaNV}/g, value.MaNV);
+            htmlMore = htmlMore.replace(/{MaHoSo}/g, value.MaHoSo);
+            htmlMore = htmlMore.replace(/{LoaiHoSo}/g, value.LoaiHoSo);
+            htmlMore = htmlMore.replace(/{NgaySinh}/g, value.NgaySinh);
+            htmlMore = htmlMore.replace(/{BatDau}/g, value.BatDau);
+            htmlMore = htmlMore.replace(/{KetThuc}/g, value.KetThuc);
+            htmlMore = htmlMore.replace(/{Id_CoQuanTTBo}/g, value.Id_CoQuanTTBo);
+            htmlMore = htmlMore.replace(/{Id_CoQuanTinh}/g, value.Id_CoQuanTinh);
+            htmlMore = htmlMore.replace(/{Id_CoQuanHuyen}/g, value.Id_CoQuanHuyen);
+            htmlMore = htmlMore.replace(/{Id_CoQuanCuThe}/g, value.Id_CoQuanCuThe);
             $("#body-table-hosogoc").append(htmlMore);
         });
+    }
+}
+function populateForm(data) {
+    if (data != null) {
+        // Iterate over the data object
+        for (const key in data) {
+            if (data.hasOwnProperty(key)) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.value = data[key];
+                }
+            }
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace QuanLyCongTacChinhSach.DataAccess.IRepositories
             {
                 using (var connection = new SqlConnection(_connectionString))
                 {
-                    string spName = $"SP_{typeof(T).Name}_Insert";
+                    string spName = $"SP_{typeof(T).Name}_Upsert";
                     var parameters = GetDynamicParameters(entity);
                     var result = await connection.QueryFirstOrDefaultAsync<int>(spName, parameters, commandType: CommandType.StoredProcedure);
                     return result == 1; 
@@ -57,8 +57,8 @@ namespace QuanLyCongTacChinhSach.DataAccess.IRepositories
             {
                 string spName = $"SP_{typeof(T).Name}_Update";
                 var parameters = new DynamicParameters(entity);
-                int affectedRows = await connection.ExecuteAsync(spName, parameters, commandType: CommandType.StoredProcedure);
-                return affectedRows > 0;
+                var result = await connection.QueryFirstOrDefaultAsync<int>(spName, parameters, commandType: CommandType.StoredProcedure);
+                return result > 0;
             }
         }
 
@@ -68,9 +68,9 @@ namespace QuanLyCongTacChinhSach.DataAccess.IRepositories
             {
                 string spName = $"SP_{typeof(T).Name}_Delete";
                 var parameters = new DynamicParameters();
-                parameters.Add("@Id", id);
-                int affectedRows = await connection.ExecuteAsync(spName, parameters, commandType: CommandType.StoredProcedure);
-                return affectedRows > 0;
+                parameters.Add("@Id_ThongTin", id);
+                var result = await connection.QueryFirstOrDefaultAsync<int>(spName, parameters, commandType: CommandType.StoredProcedure);
+                return result > 0;
             }
         }
 

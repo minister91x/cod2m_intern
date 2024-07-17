@@ -1,7 +1,11 @@
 ﻿ <!-- SELECT2 EXAMPLE -->
 @using QuanLyCongTacChinhSach.DataAccess.DTOs
 @using System.Web.Mvc
-
+<style>
+    .active-row {
+        background-color: #f1f1f1;
+    }
+</style>
 @model HoSoGoc
 <div class="card card-default">
     <div class="card-header">
@@ -22,19 +26,19 @@
         {
             @Html.AntiForgeryToken()
             <div class="row">
-
+                
                 <div class="col-7">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Họ và tên</label>
                                 <input type="checkbox" id="ckbHoVaTen" name="HoVaTen" value="HoVaTen">
-                                @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "form-control", @placeholder = "Vd: Nguyễn Trọng Quân" } })
+                                @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "form-control", @placeholder = "Vd: Nguyễn Trọng Quân", @id = "HoTen" } })
                                 @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 <label>Số hiệu QN</label>
-                                @Html.EditorFor(model => model.SoHieuQN, new { htmlAttributes = new { @class = "form-control", @placeholder = "Vd: QN123" } })
+                                @Html.EditorFor(model => model.SoHieuQN, new { htmlAttributes = new { @class = "form-control", @placeholder = "Vd: QN123", @id = "SoHieuQN" } })
                                 @Html.ValidationMessageFor(model => model.SoHieuQN, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
@@ -43,29 +47,34 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                     </div>
-                                    @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control", @data_inputmask_alias = "datetime", @data_inputmask_inputformat = "dd/mm/yyyy", @data_mask = "" } })
+                                    @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control", @data_inputmask_alias = "datetime", @data_inputmask_inputformat = "dd/mm/yyyy", @data_mask = "", @id = "NgaySinh" } })
                                     @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Loại hồ sơ</label>
-                                @Html.DropDownListFor(model => model.LoaiHoSo, (SelectList)ViewBag.StateList, new { @class = "form-control select2", @style = "width: 100%;" })
+                                @Html.DropDownListFor(model => model.LoaiHoSo, (SelectList)ViewBag.StateList, new { @class = "form-control select2", @style = "width: 100%;", @id = "LoaiHoSo" })
                                 @Html.ValidationMessageFor(model => model.LoaiHoSo, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 <label>Quyền số</label>
-                                @Html.EditorFor(model => model.QuyenSo, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                                @Html.EditorFor(model => model.QuyenSo, new { htmlAttributes = new { @class = "form-control", @type = "number", @id = "QuyenSo" } })
                                 @Html.ValidationMessageFor(model => model.QuyenSo, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 <label>Trang số</label>
-                                @Html.EditorFor(model => model.TrangSo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.TrangSo, new { htmlAttributes = new { @class = "form-control", @id = "TrangSo" } })
                                 @Html.ValidationMessageFor(model => model.TrangSo, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 <label>Số thứ tự</label>
-                                @Html.EditorFor(model => model.SoThuTu, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.SoThuTu, new { htmlAttributes = new { @class = "form-control", @id = "SoThuTu" } })
                                 @Html.ValidationMessageFor(model => model.SoThuTu, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label>Id</label>
+                                @Html.EditorFor(model => model.Id_ThongTin, new { htmlAttributes = new { @class = "form-control", @id = "Id_ThongTin" } })
+                                @Html.ValidationMessageFor(model => model.MaHoSo, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <!-- /.col -->
@@ -76,7 +85,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                     </div>
-                                    @Html.EditorFor(model => model.BatDau, new { htmlAttributes = new { @class = "form-control", @data_inputmask_alias = "datetime", @data_inputmask_inputformat = "dd/mm/yyyy", @data_mask = "" } })
+                                    @Html.EditorFor(model => model.BatDau, new { htmlAttributes = new { @class = "form-control", @data_inputmask_alias = "datetime", @data_inputmask_inputformat = "dd/mm/yyyy", @data_mask = "", @id = "BatDau" } })
                                     @Html.ValidationMessageFor(model => model.BatDau, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -86,49 +95,49 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                     </div>
-                                    @Html.EditorFor(model => model.KetThuc, new { htmlAttributes = new { @class = "form-control", @data_inputmask_alias = "datetime", @data_inputmask_inputformat = "dd/mm/yyyy", @data_mask = "" } })
+                                    @Html.EditorFor(model => model.KetThuc, new { htmlAttributes = new { @class = "form-control", @data_inputmask_alias = "datetime", @data_inputmask_inputformat = "dd/mm/yyyy", @data_mask = "", @id = "KetThuc" } })
                                     @Html.ValidationMessageFor(model => model.KetThuc, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Cơ quan TT bộ</label>
-                                @Html.DropDownListFor(model => model.Id_CoQuanTTBo, (SelectList)ViewBag.StateList, new { @class = "form-control select2", @style = "width: 100%;" })
+                                @Html.DropDownListFor(model => model.Id_CoQuanTTBo, (SelectList)ViewBag.StateList, new { @class = "form-control select2", @style = "width: 100%;", @id = "Id_CoQuanTTBo" })
                                 @Html.ValidationMessageFor(model => model.Id_CoQuanTTBo, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 <label>Cơ quan tỉnh</label>
-                                @Html.DropDownListFor(model => model.Id_CoQuanTinh, (SelectList)ViewBag.StateList, new { @class = "form-control select2", @style = "width: 100%;" })
+                                @Html.DropDownListFor(model => model.Id_CoQuanTinh, (SelectList)ViewBag.StateList, new { @class = "form-control select2", @style = "width: 100%;", @id = "Id_CoQuanTinh" })
                                 @Html.ValidationMessageFor(model => model.Id_CoQuanTinh, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 <label>Cơ quan huyện</label>
-                                @Html.DropDownListFor(model => model.Id_CoQuanHuyen, (SelectList)ViewBag.StateList, new { @class = "form-control select2", @style = "width: 100%;" })
+                                @Html.DropDownListFor(model => model.Id_CoQuanHuyen, (SelectList)ViewBag.StateList, new { @class = "form-control select2", @style = "width: 100%;", @id = "Id_CoQuanHuyen" })
                                 @Html.ValidationMessageFor(model => model.Id_CoQuanHuyen, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 <label>Cơ quan cụ thể</label>
-                                @Html.DropDownListFor(model => model.Id_CoQuanCuThe, (SelectList)ViewBag.StateList, new { @class = "form-control select2", @style = "width: 100%;" })
-                                @Html.ValidationMessageFor(model => model.Id_CoQuanHuyen, "", new { @class = "text-danger" })
+                                @Html.DropDownListFor(model => model.Id_CoQuanCuThe, (SelectList)ViewBag.StateList, new { @class = "form-control select2", @style = "width: 100%;", @id = "Id_CoQuanCuThe" })
+                                @Html.ValidationMessageFor(model => model.Id_CoQuanCuThe, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 <label>Cơ quan TT bộ</label>
-                                @Html.DropDownListFor(model => model.Id_CoQuanXa, (SelectList)ViewBag.StateList, new { @class = "form-control select2", @style = "width: 100%;" })
+                                @Html.DropDownListFor(model => model.Id_CoQuanXa, (SelectList)ViewBag.StateList, new { @class = "form-control select2", @style = "width: 100%;", @id = "Id_CoQuanXa" })
                                 @Html.ValidationMessageFor(model => model.Id_CoQuanTTBo, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 <label>Mã hồ sơ</label>
-                                @Html.EditorFor(model => model.MaHoSo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.MaHoSo, new { htmlAttributes = new { @class = "form-control", @id = "MaHoSo" } })
                                 @Html.ValidationMessageFor(model => model.MaHoSo, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="d-flex justify-content-between">
-                                <button class="btn btn-primary" id="btn-search">Tìm kiếm</button>
+                                <button class="btn btn-primary" id="btn-search" type="button">Tìm kiếm</button>
                                 <button class="btn btn-secondary">Load lại</button>
                                 <button class="btn btn-success">In phiếu</button>
                                 <button class="btn btn-danger" type="submit">Thêm mới</button>
-                                <button class="btn btn-warning">Cập nhật</button>
-                                <button class="btn btn-info">Xóa bỏ</button>
+                                <button class="btn btn-warning" id="btn-update" type="button">Cập nhật</button>
+                                <button class="btn btn-info" id="btn-delete">Xóa bỏ</button>
                             </div>
                         </div>
                     </div>
@@ -136,10 +145,9 @@
                 <div class="col-5">
                     <div class="form-group">
                         <label>Thông tin chi tiết</label>
-                        @Html.TextAreaFor(model => model.TTChiTiet, new { @class = "form-control", rows = "25" })
+                        @Html.TextAreaFor(model => model.TTChiTiet, new { @class = "form-control", rows = "25", @id = "TTChiTiet" })
                         @Html.ValidationMessageFor(model => model.TTChiTiet, "", new { @class = "text-danger" })
                     </div>
-
                 </div>
             </div>
         }
@@ -176,30 +184,53 @@
     </div>
 </div>
 <script id="templateHtmlShowHoSoGoc" type="text/x-handlebars-template">
-    <tr class="row">
-        <th scope="row" class="col-1">{id}</th>
-        <td class="col-3 text-overflow">{hoTen}</td>
-        <td class="col-3 text-overflow">{soHieuQN}</td>
-        <td class="col-1 text-center">{ngaySinh}</td>
-        <td class="col-1 text-center">{loaiHoSo}</td>
-        <td class="col-1 text-center">{quyenSo}</td>
-        <td class="col-1 text-overflow">{soThuTu}</td>
-        <td class="col-1 text-overflow">{batDau}</td>
-        <td class="col-1 text-overflow">{ketThuc}</td>
-        <td class="col-1 text-overflow">{id_CoQuanTTBo}</td>
-        <td class="col-1 text-overflow">{id_CoQuanTinh}</td>
-        <td class="col-1 text-overflow">{id_CoQuanHuyen}</td>
-        <td class="col-1 text-overflow">{id_CoQuanXa}</td>
-        <td class="col-1 text-overflow">{id_CoQuanCuThe}</td>
-        <td class="col-1 text-overflow">{maHoSo}</td>
+    <tr onclick="myFunction(this,'{Id_ThongTin}')">
+        <td class="text-overflow">{Id_ThongTin}</td>
+        <td class="text-overflow">{HoTen}</td>
+        <td class="text-overflow">{MaNV}</td>
+        <td class="text-center">{MaHoSo}</td>
+        <td class="text-center">{LoaiHoSo}</td>
+        <td class="text-center">
+            {NgaySinh}
+        </td>
+        <td class="text-overflow">{BatDau}</td>
+        <td class="text-overflow">{KetThuc}</td>
+        <td class="text-overflow">{Id_CoQuanTTBo}</td>
+        <td class="text-overflow">{Id_CoQuanTinh}</td>
+        <td class="text-overflow">{Id_CoQuanHuyen}</td>
+        <td class="text-overflow">{Id_CoQuanCuThe}</td>
     </tr>
 </script>
 @section Scripts{
     <script src="~/Content/Js/HoSoGoc.js"></script>
     <script>
+        function myFunction(x, idThongTin) {
+            $.ajax({
+                url: '/HoSoGoc/GetById',
+                type: 'GET',
+                data: {
+                    id: idThongTin
+                },
+                dataType: 'json',
+                success: function (data) {
+                    populateForm(data);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching data:', error);
+                    // Handle error as needed
+                }
+            });
+        }
+        function appediaInput(data) {
+            if (data != null) {
 
+            }
+        }
         $(document).ready(function () {
             showHoSoGoc(1);
+            $('#customerDatatable td').on('click', function () {
+                alert("123123");
+            });
         });
         $("#Form_HoSoGoc").on("submit", function (e) {
             e.preventDefault();
@@ -212,6 +243,7 @@
                     if (response.IsSuccess) {
                         ShowToater('success', response.Message);
                         $("#Form_HoSoGoc").trigger('reset');
+                        showHoSoGoc(1);
                     } else {
                         ShowToater('error', response.Message);
                     }
@@ -220,22 +252,46 @@
         })
         $("#btn-search").on("click", function (e) {
             e.preventDefault();
-            let formData = $('#Form_HoSoGoc').serialize();
-            $.ajax({
-                type: "POST",
-                url: "/HoSoGoc/Search",
-                data: formData,
-                success: function (response) {
-                    if (response.IsSuccess) {
-                        ShowToater('success', response.Message);
-                        $("#Form_HoSoGoc").trigger('reset');
-                    } else {
-                        ShowToater('error', response.Message);
-                    }
-                }
-            })
+            showHoSoGoc(1);
         });
+        $("#btn-delete").on("click", function (e) {
+            e.preventDefault();
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this imaginary file!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        var id = $('#Id_ThongTin').val() // Extract the value from the element
+                        $.ajax({
+                            type: "POST",
+                            url: "/HoSoGoc/Delete",
+                            data: {
+                                id: id
+                            },
+                            success: function (response) {
+                                if (response.IsSuccess) {
+                                    swal("Poof! Your imaginary file has been deleted!", {
+                                        icon: "success",
+                                    });
+                                    $("#Form_HoSoGoc").trigger('reset');
+                                    showHoSoGoc(1);
+                                } else {
+                                    ShowToaster('error', response.Message);
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                ShowToaster('error', 'An error occurred while processing your request.');
+                            }
+                        });
+                    }
+                });
 
+           
+        });
     </script>
 }
 <!-- /.card -->

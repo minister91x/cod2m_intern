@@ -2127,6 +2127,7 @@
     <Content Include="lib\jquery-toast-plugin\jquery.toast.js" />
     <Content Include="lib\jquery-toast-plugin\jquery.toast.min.css" />
     <Content Include="lib\jquery-toast-plugin\jquery.toast.min.js" />
+    <Content Include="lib\sweetalert\sweetalert.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
