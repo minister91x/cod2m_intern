@@ -46,7 +46,10 @@
   <ItemGroup>
     <Compile Include="DTOs\HoSoGoc.cs" />
     <Compile Include="DTOs\ViewModels\SearchHoSoGocVM.cs" />
+    <Compile Include="DTOs\tb_YeuCauXuLy.cs" />
+    <Compile Include="Factory\YeuCauXuLyFactory.cs" />
     <Compile Include="Factory\HoSoGocFactory.cs" />
+    <Compile Include="Factory\IYeuCauXuLyFactory.cs" />
     <Compile Include="Factory\IHoSoGocFactory.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
